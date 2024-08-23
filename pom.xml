@@ -6,7 +6,7 @@
     <artifactId>vietmap-test</artifactId>
     <version>1.0.1</version>
     <name>vietmap-test</name>
-    <packaging>jar</packaging>
+    <packaging>aar</packaging>
     <build>
         <plugins>
         <plugin>
