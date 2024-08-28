@@ -1,33 +1,74 @@
-# vietmap-android-auto
-vietmap-android-auto
+This SDK only work with Vietmap Android Map SDK v3.1.0 and above. 
+Please make sure you have already integrated Vietmap Android Map SDK before using this SDK.
+```gradle
+dependencies {
+    implementation 'com.github.vietmap-company:vietmap-android-auto:1.4.0'
+    implementation 'com.github.vietmap-company:maps-sdk-android:3.1.0'
+}
+```
+Please follow the Android Auto implementation guide [here](https://developer.android.com/codelabs/car-app-library-fundamentals#0)
 
-License by Vietmap company.
+This SDK will return the map as a surface view, you can add it to your Android Auto layout as a surface view.
 
-# Distribute document
 
-- Copy the generated aar file and paste to the distribute repository
-- Rename the SDK file as below format:
-```
-VietmapAndroidAutoSDK.aar
-```
-Example:
-```
-VietmapAndroidAutoSDK.aar
-```
-- Change the version in `jitpack.yml` file as below
-```yml
- - FILE="-Dfile=VietmapAndroidAutoSDK.aar" 
- ```
-- Create new tag __match with the version was created__
-## The tag must be compliance with below format:
-```yml
-    [0-9]+.[0-9]+.[0-9]
-i.e:
-    1.0.1
+## Usage guide
+- Create a new instance of the VietMapAndroidAutoSurface
+```kotlin
+    val mNavigationCarSurface = VietMapAndroidAutoSurface(carContext, lifecycle)
 ```
 
-- Commit and push new code to created tag
-- Github action will release new version to jitpack automatically
+- Init the VietMapAndroidAutoSurface with the style
+```kotlin
+    mNavigationCarSurface.init(
+        Style.Builder()
+            .fromUri("https://maps.vietmap.vn/api/maps/light/styles.json?apikey=YOUR_API_KEY_HERE")
+    )
+```
+- Add onMapReady callback (if needed)
+```kotlin
+    mNavigationCarSurface.init(
+        Style.Builder()
+            .fromUri("https://maps.vietmap.vn/api/maps/light/styles.json?apikey=YOUR_API_KEY_HERE"),
+        OnMapReadyCallback {
+            vietMapGL = it
+        }
+    )
+```
+- Add onStyleLoaded callback (if needed)
+```kotlin
+    mNavigationCarSurface.init(
+        Style.Builder()
+            .fromUri("https://maps.vietmap.vn/api/maps/light/styles.json?apikey=YOUR_API_KEY_HERE"),
+        OnStyleLoaded{
+            style = it
+        },
+        OnMapReadyCallback {
+            vietMapGL = it
+        },
+    )
+```
+- Add surface lifecycle callback (if needed)
+```kotlin
+    private val mSurfaceCallback: SurfaceCallback = object : SurfaceCallback {
+        override fun onSurfaceAvailable(container: SurfaceContainer) {
+            super.onSurfaceAvailable(container)
+        }
+        override fun onClick(x: Float, y: Float) {
+            super.onClick(x, y)
+        }
 
-### Go to https://jitpack.io/#vietmap-company/vietmap-android-auto
-and make sure the get it button of latest version is full-fill green status. If it getting white status, click it.
+        override fun onFling(velocityX: Float, velocityY: Float) {
+            super.onFling(velocityX, velocityY)
+        }
+
+        override fun onScroll(distanceX: Float, distanceY: Float) {
+            super.onScroll(distanceX, distanceY)
+        }
+
+        override fun onScale(focusX: Float, focusY: Float, scaleFactor: Float) {
+            super.onScale(focusX, focusY, scaleFactor)
+        }
+    }
+
+    mNavigationCarSurface.addOnSurfaceCallbackListener(mSurfaceCallback)
+```
