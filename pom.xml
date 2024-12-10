@@ -3,9 +3,9 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <modelVersion>4.0.0</modelVersion>
     <groupId>vn.vietmap.android.test</groupId>
-    <artifactId>vietmap-test</artifactId>
-    <version>1.0.1</version>
-    <name>vietmap-test</name>
+    <artifactId>vietmap-android-auto</artifactId>
+    <version>1.6.0</version>
+    <name>vietmap-android-auto</name>
     <packaging>aar</packaging>
     <build>
         <plugins>
