@@ -318,3 +318,21 @@ desktop-head-unit.exe   # Windows
 
     mNavigationCarSurface.addOnSurfaceCallbackListener(mSurfaceCallback)
 ```
+- Draw a custom Android View on the map, like speed limit sign, traffic light, etc.
+
+```kotlin
+    val yourCustomView1 = ImageView(carContext)
+    yourCustomView1.setImageResource(R.drawable.your_custom_drawable)
+    
+    /// The view must be layout before adding to the surface
+    yourCustomView1.layout(0, 0, 100, 100)
+
+    val yourCustomView2 = ImageView(carContext)
+    yourCustomView2.setImageResource(R.drawable.your_custom_drawable_2)
+
+    /// The view must be layout before adding to the surface
+    yourCustomView2.layout(0, 0, 100, 100)
+
+    mSurfaceRenderer.addCustomView(yourCustomView1, 100, 100)
+    mSurfaceRenderer.addCustomView(yourCustomView2, 300, 300)
+```
