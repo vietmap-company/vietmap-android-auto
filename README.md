@@ -321,5 +321,9 @@ desktop-head-unit.exe   # Windows
 - Draw a custom Bitmap on the map, like speed limit sign, traffic light, etc.
 
 ```kotlin
-    mSurfaceRenderer.addCustomView(yourCustomBitmap, 300, 300)
+    val yourCustomAndroidView = ImageView(carContext)
+    yourCustomAndroidView.setImageResource(R.drawable.btn_star)
+    yourCustomAndroidView.layout(0, 0, 100, 100)
+
+    mSurfaceRenderer.addCustomBitmapView(yourCustomAndroidView.drawToBitmap(), 300, 300)
 ```
